@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Sekolah | SMK Negeri 2 Lebong</title>
+  <meta name="description" content="Profil lengkap SMK Negeri 2 Lebong, NPSN 10703078. Sekolah Kejuruan Negeri terbaik di Kabupaten Lebong dengan jurusan unggulan siap kerja.">
+  <meta name="keywords" content="Profil SMK Negeri 2 Lebong, Sejarah SMKN 2 Lebong, Visi Misi SMK, SMK Tangua, Jurusan SMK Lebong">
+  <meta name="author" content="SMKN 2 Lebong">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #0a3d62;
+      color: white;
+      text-align: center;
+      padding: 1rem 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: top 0.4s;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: #3c6382;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #0a3d62;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #1e6091;
+    }
+
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 16px;
+      line-height: 1.7;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="topHeader">
+    <h1>SMK Negeri 2 Lebong</h1>
+    <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="profil.html" class="active">Profil</a>
+    <a href="sambutan.html">Sambutan</a>
+    <a href="kompetensi.html">Kompetensi Keahlian</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="berita.html">Berita</a>
+    <a href="informasi.html">Informasi</a>
+    <a href="ppdb.html">PPDB</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <main>
+    <h2>Profil SMK Negeri 2 Lebong</h2>
+    <p><strong>SMK Negeri 2 Lebong</strong> adalah sekolah menengah kejuruan negeri yang berlokasi di Desa Tangua, Kecamatan Uram Jaya, Kabupaten Lebong, Provinsi Bengkulu.</p>
+    <p>Berdiri dengan semangat mencetak generasi unggul, SMK ini terus mengembangkan pendidikan vokasi yang berbasis dunia kerja dan kewirausahaan. Terakreditasi <strong>B</strong> dan memiliki NPSN <strong>10703078</strong>.</p>
+    <p>Saat ini, sekolah memiliki lima jurusan unggulan:</p>
+    <ul>
+      <li>Tata Busana</li>
+      <li>Teknik Instalasi Tenaga Listrik</li>
+      <li>Teknik dan Bisnis Sepeda Motor</li>
+      <li>Teknik Kendaraan Ringan Otomotif</li>
+      <li>Desain Komunikasi Visual</li>
+    </ul>
+    <p>Kami terus berinovasi dalam pembelajaran, membangun kerja sama dengan dunia industri, serta mengembangkan karakter siswa melalui kegiatan ekstrakurikuler dan budaya sekolah yang positif.</p>
+    <p>SMK Negeri 2 Lebong bukan hanya tempat belajar, tetapi tempat berkembang menjadi pribadi yang siap kerja, berjiwa wirausaha, dan berakhlak mulia.</p>
+  </main>
+
+  <script>
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      const header = document.getElementById("topHeader");
+      let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        header.style.top = "0";
+      } else {
+        header.style.top = "-100px";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  </script>
+</body>
+</html>

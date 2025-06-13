@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPDB | SMK Negeri 2 Lebong</title>
+  <meta name="description" content="Formulir Pendaftaran PPDB SMK Negeri 2 Lebong Tahun 2026." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: #0a3d62;
+      color: white;
+      text-align: center;
+      padding: 1rem 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: top 0.4s;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: #3c6382;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #0a3d62;
+      font-size: 0.95rem;
+    }
+    nav a:hover,
+    nav a.active {
+      background: #1e6091;
+    }
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 16px;
+      line-height: 1.7;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .btn-3d {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #ffc107;
+      color: #102542;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      box-shadow: 0 4px 0 #c69500;
+      transition: all 0.2s ease-in-out;
+    }
+    .btn-3d:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #c69500;
+    }
+    .btn-3d:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #c69500;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="topHeader">
+    <h1>SMK Negeri 2 Lebong</h1>
+    <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="sambutan.html">Sambutan</a>
+    <a href="kompetensi.html">Kompetensi Keahlian</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="berita.html">Berita</a>
+    <a href="informasi.html">Informasi</a>
+    <a href="ppdb.html" class="active">PPDB</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <main>
+    <h2>Formulir Pendaftaran PPDB</h2>
+
+    <p>Silakan klik tombol di bawah ini untuk mengisi formulir pendaftaran secara online melalui sistem resmi SPMB:</p>
+
+    <div style="margin-top: 2rem;">
+      <a class="btn-3d" href="https://spmb.smkn2lebong.sch.id" target="_blank">Daftar Sekarang</a>
+    </div>
+
+    <p style="margin-top: 2rem;">Jika mengalami kendala saat mendaftar, silakan hubungi panitia PPDB melalui WhatsApp atau datang langsung ke sekolah pada jam kerja.</p>
+  </main>
+
+  <script>
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      const header = document.getElementById("topHeader");
+      let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        header.style.top = "0";
+      } else {
+        header.style.top = "-100px";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  </script>
+
+</body>
+</html>

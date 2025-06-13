@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kompetensi Keahlian | SMK Negeri 2 Lebong</title>
+  <meta name="description" content="Lima jurusan unggulan SMK Negeri 2 Lebong: Tata Busana, T. Listrik, TBSM, TKRO, dan DKV.">
+  <meta name="author" content="SMKN 2 Lebong">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #0a3d62;
+      color: white;
+      text-align: center;
+      padding: 1rem 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: top 0.4s;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: #3c6382;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #0a3d62;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #1e6091;
+    }
+
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 16px;
+      line-height: 1.7;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: #0a3d62;
+    }
+
+    .jurusan {
+      margin-bottom: 2rem;
+    }
+
+    .jurusan h3 {
+      color: #1e6091;
+      margin-bottom: 0.5rem;
+    }
+
+    .jurusan ul {
+      padding-left: 20px;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="topHeader">
+    <h1>SMK Negeri 2 Lebong</h1>
+    <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="sambutan.html">Sambutan</a>
+    <a href="kompetensi.html" class="active">Kompetensi Keahlian</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="berita.html">Berita</a>
+    <a href="informasi.html">Informasi</a>
+    <a href="ppdb.html">PPDB</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <main>
+    <h2>Kompetensi Keahlian</h2>
+
+    <div class="jurusan">
+      <h3>Tata Busana</h3>
+      <p>Mengembangkan kreativitas dan keterampilan dalam dunia fashion. Dilengkapi dengan ruang praktik menjahit, desain mode, dan digital fashion design.</p>
+      <ul>
+        <li>Kolaborasi dengan industri fashion lokal</li>
+        <li>Sering tampil di ajang lomba busana</li>
+        <li>Alumni sukses di butik ternama dan wirausaha</li>
+      </ul>
+    </div>
+
+    <div class="jurusan">
+      <h3>Teknik Instalasi Tenaga Listrik</h3>
+      <p>Memberikan keahlian dalam instalasi listrik rumah tangga hingga industri dengan standar keselamatan dan teknologi terbaru.</p>
+      <ul>
+        <li>Praktik langsung dengan peralatan industri</li>
+        <li>Lulusan bersertifikasi K3 dan teknisi listrik</li>
+        <li>Kerja sama dengan PLN dan dunia kerja teknik</li>
+      </ul>
+    </div>
+
+    <div class="jurusan">
+      <h3>Teknik dan Bisnis Sepeda Motor (TBSM)</h3>
+      <p>Fokus pada perawatan, perbaikan, dan manajemen bengkel sepeda motor modern sesuai kebutuhan industri otomotif roda dua.</p>
+      <ul>
+        <li>Praktek di bengkel standar AHASS</li>
+        <li>Magang di dealer resmi Honda & Yamaha</li>
+        <li>Alumni terserap luas di dunia kerja otomotif</li>
+      </ul>
+    </div>
+
+    <div class="jurusan">
+      <h3>Teknik Kendaraan Ringan Otomotif (TKRO)</h3>
+      <p>Mengajarkan sistem kendaraan roda empat secara menyeluruh, termasuk sistem injeksi, rem, transmisi, dan kelistrikan mobil.</p>
+      <ul>
+        <li>Laboratorium praktik modern</li>
+        <li>Sering ikut lomba otomotif tingkat provinsi</li>
+        <li>Lulusan diterima di Astra, Toyota, Mitsubishi</li>
+      </ul>
+    </div>
+
+    <div class="jurusan">
+      <h3>Desain Komunikasi Visual (DKV)</h3>
+      <p>Membentuk siswa kreatif dan kompeten di bidang desain grafis, ilustrasi digital, dan animasi multimedia.</p>
+      <ul>
+        <li>Kurikulum sesuai industri kreatif</li>
+        <li>Pemenang lomba poster dan desain tingkat pelajar</li>
+        <li>Peluang kerja luas di studio desain & freelance</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <script>
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      const header = document.getElementById("topHeader");
+      let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        header.style.top = "0";
+      } else {
+        header.style.top = "-100px";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  </script>
+
+</body>
+</html>

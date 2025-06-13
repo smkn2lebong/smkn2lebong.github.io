@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeri Kegiatan | SMK Negeri 2 Lebong</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: #0a3d62;
+      color: white;
+      text-align: center;
+      padding: 1rem 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: top 0.4s;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: #3c6382;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #0a3d62;
+      font-size: 0.95rem;
+    }
+    nav a:hover, nav a.active {
+      background: #1e6091;
+    }
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 16px;
+      line-height: 1.7;
+    }
+    .galeri-nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .galeri-nav button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #0a3d62;
+      color: white;
+      cursor: pointer;
+    }
+    .galeri-nav button:hover {
+      background-color: #1e6091;
+    }
+    .foto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .foto-grid img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .video-list {
+      margin-top: 20px;
+    }
+    .video-item {
+      margin-bottom: 32px;
+    }
+    .video-item iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .btn-3d, .btn-kembali {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #ffc107;
+      color: #102542;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 8px;
+      margin-right: 12px;
+      box-shadow: 0 4px 0 #c69500;
+      transition: all 0.2s ease-in-out;
+    }
+    .btn-kembali {
+      background: #3c6382;
+      color: white;
+      box-shadow: 0 4px 0 #2a506b;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="topHeader">
+    <h1>SMK Negeri 2 Lebong</h1>
+    <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
+  </header>
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="sambutan.html">Sambutan</a>
+    <a href="kompetensi.html">Kompetensi Keahlian</a>
+    <a href="galeri.html" class="active">Galeri</a>
+    <a href="berita.html">Berita</a>
+    <a href="informasi.html">Informasi</a>
+    <a href="ppdb.html">PPDB</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <main>
+    <section class="galeri">
+      <h2>Galeri Kegiatan</h2>
+      <div class="galeri-nav">
+        <button onclick="showTab('foto')">Foto</button>
+        <button onclick="showTab('video')">Video</button>
+      </div>
+
+      <div id="foto" class="tab-content">
+        <h3>Dokumentasi Foto</h3>
+        <div class="foto-grid" id="foto-grid">Memuat foto...</div>
+      </div>
+
+      <div id="video" class="tab-content" style="display: none;">
+        <h3>Dokumentasi Video</h3>
+        <div class="video-list" id="video-list">Memuat video...</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showTab(tabName) {
+      document.getElementById('foto').style.display = tabName === 'foto' ? 'block' : 'none';
+      document.getElementById('video').style.display = tabName === 'video' ? 'block' : 'none';
+    }
+
+    // FOTO
+    const fotoContainer = document.getElementById("foto-grid");
+    fetch("assets/galeri_foto.txt")
+      .then(res => res.text())
+      .then(data => {
+        const lines = data.trim().split(/\r?\n/).filter(line => line);
+        fotoContainer.innerHTML = lines.map(url => `<img src="${url}" alt="Foto Kegiatan">`).join('');
+      });
+
+    // VIDEO
+    const videoContainer = document.getElementById("video-list");
+    fetch("assets/galeri_video.txt")
+      .then(res => res.text())
+      .then(data => {
+        const blocks = data.split(/#(.+?)\n/).slice(1);
+        videoContainer.innerHTML = "";
+        for (let i = 0; i < blocks.length; i += 2) {
+          const title = blocks[i].trim();
+          const url = blocks[i+1].trim();
+          let content = '';
+
+          if (url.includes("youtube.com") || url.includes("youtu.be")) {
+            const id = url.includes("embed") ? url.split("/").pop() : new URL(url).searchParams.get("v") || url.split("/").pop();
+            content = `
+              <div class="video-item">
+                <h3>${title}</h3>
+                <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
+              </div>
+            `;
+          } else if (url.includes("facebook.com")) {
+            content = `
+              <div class="video-item">
+                <h3>${title}</h3>
+                <p>Video hanya dapat ditonton melalui Facebook. Silakan klik tombol di bawah.</p>
+                <a href="${url}" class="btn-3d" target="_blank">Tonton di Facebook</a>
+                <a href="galeri.html" class="btn-kembali">Kembali ke Galeri</a>
+              </div>
+            `;
+          } else {
+            content = `<div class="video-item"><p>Link tidak dikenali: ${url}</p></div>`;
+          }
+
+          videoContainer.innerHTML += content;
+        }
+      });
+
+    // Scroll untuk header
+    let prevScroll = window.pageYOffset;
+    window.addEventListener("scroll", () => {
+      const currScroll = window.pageYOffset;
+      const header = document.getElementById("topHeader");
+      if (!header) return;
+      header.style.top = (currScroll > prevScroll) ? "-100px" : "0";
+      prevScroll = currScroll;
+    });
+  </script>
+
+</body>
+</html>
