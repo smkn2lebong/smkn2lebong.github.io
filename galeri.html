@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Galeri Kegiatan | SMK Negeri 2 Lebong</title>
-  <meta name="description" content="Galeri dokumentasi kegiatan SMK Negeri 2 Lebong. Lihat foto dan video kegiatan sekolah, pembelajaran, kunjungan industri, lomba, dan lainnya." />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="Galeri kegiatan SMK Negeri 2 Lebong: dokumentasi foto dan video kegiatan belajar, lomba, kunjungan industri, dan lainnya." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
       margin: 0;
@@ -139,23 +139,21 @@
   </nav>
 
   <main>
-    <section class="galeri">
-      <h2>Galeri Kegiatan</h2>
-      <div class="galeri-nav">
-        <button onclick="showTab('foto')">Foto</button>
-        <button onclick="showTab('video')">Video</button>
-      </div>
+    <h2>Galeri Kegiatan</h2>
+    <div class="galeri-nav">
+      <button onclick="showTab('foto')">Foto</button>
+      <button onclick="showTab('video')">Video</button>
+    </div>
 
-      <div id="foto" class="tab-content">
-        <h3>Dokumentasi Foto</h3>
-        <div class="foto-grid" id="foto-grid">Memuat foto...</div>
-      </div>
+    <div id="foto" class="tab-content">
+      <h3>Dokumentasi Foto</h3>
+      <div class="foto-grid" id="foto-grid">Memuat foto...</div>
+    </div>
 
-      <div id="video" class="tab-content" style="display: none;">
-        <h3>Dokumentasi Video</h3>
-        <div class="video-list" id="video-list">Memuat video...</div>
-      </div>
-    </section>
+    <div id="video" class="tab-content" style="display: none;">
+      <h3>Dokumentasi Video</h3>
+      <div class="video-list" id="video-list">Memuat video...</div>
+    </div>
   </main>
 
   <script>
@@ -164,57 +162,53 @@
       document.getElementById('video').style.display = tabName === 'video' ? 'block' : 'none';
     }
 
-    // FOTO
-    const fotoContainer = document.getElementById("foto-grid");
+    // Load Foto
     fetch("assets/galeri_foto.txt")
       .then(res => res.text())
       .then(data => {
-        const lines = data.trim().split(/\r?\n/).filter(line => line);
-        fotoContainer.innerHTML = lines.map(url => `<img src="${url}" alt="Foto Kegiatan">`).join('');
+        const lines = data.trim().split(/\r?\n/).filter(Boolean);
+        document.getElementById("foto-grid").innerHTML = lines.map(url => `<img src="${url}" alt="Foto Kegiatan">`).join('');
       });
 
-    // VIDEO
-    const videoContainer = document.getElementById("video-list");
+    // Load Video
     fetch("assets/galeri_video.txt")
       .then(res => res.text())
       .then(data => {
         const blocks = data.split(/#(.+?)\n/).slice(1);
-        videoContainer.innerHTML = "";
+        const container = document.getElementById("video-list");
+        container.innerHTML = "";
         for (let i = 0; i < blocks.length; i += 2) {
           const title = blocks[i].trim();
           const url = blocks[i+1].trim();
-          let content = '';
+          let html = "";
 
           if (url.includes("youtube.com") || url.includes("youtu.be")) {
             const id = url.includes("embed") ? url.split("/").pop() : new URL(url).searchParams.get("v") || url.split("/").pop();
-            content = `
+            html = `
               <div class="video-item">
                 <h3>${title}</h3>
                 <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
-              </div>
-            `;
+              </div>`;
           } else if (url.includes("facebook.com")) {
-            content = `
+            html = `
               <div class="video-item">
                 <h3>${title}</h3>
-                <p>Video hanya dapat ditonton melalui Facebook. Silakan klik tombol di bawah.</p>
+                <p>Video hanya dapat ditonton melalui Facebook. Klik tombol berikut:</p>
                 <a href="${url}" class="btn-3d" target="_blank">Tonton di Facebook</a>
-                <a href="galeri.html" class="btn-kembali">Kembali ke Galeri</a>
-              </div>
-            `;
+              </div>`;
           } else {
-            content = `<div class="video-item"><p>Link tidak dikenali: ${url}</p></div>`;
+            html = `<div class="video-item"><p>Link tidak dikenali: ${url}</p></div>`;
           }
 
-          videoContainer.innerHTML += content;
+          container.innerHTML += html;
         }
       });
 
-    // Scroll hide/show header
+    // Sticky header logic
     let prevScroll = window.pageYOffset;
     window.addEventListener("scroll", () => {
-      const currScroll = window.pageYOffset;
       const header = document.getElementById("topHeader");
+      const currScroll = window.pageYOffset;
       if (!header) return;
       header.style.top = (currScroll > prevScroll) ? "-100px" : "0";
       prevScroll = currScroll;
