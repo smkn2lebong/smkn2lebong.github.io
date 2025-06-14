@@ -84,6 +84,43 @@
     button:hover {
       background: #1e6091;
     }
+
+    /* Floating Chat Button */
+    .floating-chat-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0a3d62;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+    .chat-popup {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background-color: #fff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .chat-popup-header {
+      background: #0a3d62;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .chat-popup form {
+      padding: 10px;
+    }
   </style>
 </head>
 <body>
@@ -91,7 +128,6 @@
     <h1>SMK Negeri 2 Lebong</h1>
     <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
   </header>
-
   <nav>
     <a href="index.html">Beranda</a>
     <a href="profil.html">Profil</a>
@@ -103,45 +139,67 @@
     <a href="ppdb.html">PPDB</a>
     <a href="kontak.html" class="active">Kontak</a>
   </nav>
-
   <main>
     <h2>📞 Kirim Pesan ke Admin</h2>
     <form id="formTelegram" onsubmit="kirimPesanTelegram(); return false;">
       <input type="text" id="nama" placeholder="Nama Anda" required />
-      <input type="email" id="email" placeholder="Email Anda" required />
+      <input type="tel" id="nomor" placeholder="Nomor WA Anda (08xxxxxxxxxx)" required />
       <textarea id="pesan" placeholder="Tulis pesan Anda di sini..." required></textarea>
       <button type="submit">Kirim ke Admin</button>
     </form>
   </main>
 
+  <button class="floating-chat-btn" onclick="toggleChatPopup()">💬</button>
+
+  <div class="chat-popup" id="popupChat">
+    <div class="chat-popup-header">Kirim Pesan ke Admin</div>
+    <form onsubmit="kirimPesanTelegramPopup(); return false;">
+      <input type="text" id="popupNama" placeholder="Nama Anda" required />
+      <input type="tel" id="popupNomor" placeholder="Nomor WA Anda (08xxxx)" required />
+      <textarea id="popupPesan" placeholder="Pesan Anda" required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+
   <script>
     async function kirimPesanTelegram() {
-      const nama = document.getElementById("nama").value;
-      const email = document.getElementById("email").value;
-      const pesan = document.getElementById("pesan").value;
-
-      const chatID = "1621437333";
-      const token = "7680568615:AAHfC-y_pnJHuZf3Qvu6XShAOryBD_h3T2A";
-      const teks = `📥 Pesan Baru dari Website:\n\n👤 Nama: ${nama}\n📧 Email: ${email}\n💬 Pesan:\n${pesan}`;
-
-      const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-      await fetch(url, {
+      const nama = document.getElementById("nama").value.trim();
+      const nomor = document.getElementById("nomor").value.trim();
+      const pesan = document.getElementById("pesan").value.trim();
+      const waLink = nomor.startsWith("0") ? "https://wa.me/62" + nomor.slice(1) : "https://wa.me/" + nomor;
+      const teks = `📥 Pesan Baru dari Website:\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
+      await fetch(`https://api.telegram.org/bot7680568615:AAFcJmPcxX0SfkRv30SR7CVEZ4G-MJSA0Rk/sendMessage`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: chatID,
-          text: teks
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: "1621437333", text: teks })
       });
-
       alert("Pesan berhasil dikirim! Admin akan segera membalas.");
       document.getElementById("formTelegram").reset();
     }
 
-    // Sticky header scroll effect
+    async function kirimPesanTelegramPopup() {
+      const nama = document.getElementById("popupNama").value.trim();
+      const nomor = document.getElementById("popupNomor").value.trim();
+      const pesan = document.getElementById("popupPesan").value.trim();
+      const waLink = nomor.startsWith("0") ? "https://wa.me/62" + nomor.slice(1) : "https://wa.me/" + nomor;
+      const teks = `📥 Pesan Baru dari Website (Popup):\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
+      await fetch(`https://api.telegram.org/bot7680568615:AAFcJmPcxX0SfkRv30SR7CVEZ4G-MJSA0Rk/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: "1621437333", text: teks })
+      });
+      alert("Pesan berhasil dikirim melalui popup!");
+      document.getElementById("popupNama").value = "";
+      document.getElementById("popupNomor").value = "";
+      document.getElementById("popupPesan").value = "";
+      document.getElementById("popupChat").style.display = "none";
+    }
+
+    function toggleChatPopup() {
+      const popup = document.getElementById("popupChat");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
     const header = document.getElementById("topHeader");
     let prevScroll = window.pageYOffset;
     window.addEventListener("scroll", () => {
