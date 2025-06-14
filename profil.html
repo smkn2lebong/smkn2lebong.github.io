@@ -4,12 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profil Sekolah | SMK Negeri 2 Lebong</title>
-  <meta name="description" content="Profil lengkap SMK Negeri 2 Lebong, NPSN 10703078. Sekolah Kejuruan Negeri terbaik di Kabupaten Lebong dengan jurusan unggulan siap kerja.">
-  <meta name="keywords" content="Profil SMK Negeri 2 Lebong, Sejarah SMKN 2 Lebong, Visi Misi SMK, SMK Tangua, Jurusan SMK Lebong">
-  <meta name="author" content="SMKN 2 Lebong">
-  <meta name="robots" content="index, follow">
+  <meta name="description" content="Profil resmi SMK Negeri 2 Lebong: visi, misi, jurusan, dan komitmen dalam mencetak lulusan yang unggul dan siap kerja." />
+  <meta name="keywords" content="Profil SMK Negeri 2 Lebong, Visi Misi SMK, Jurusan SMKN 2 Lebong, Sekolah Kejuruan Lebong" />
+  <meta name="author" content="SMKN 2 Lebong" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
   <style>
     body {
       margin: 0;
@@ -17,7 +15,6 @@
       background-color: #f4f6f9;
       color: #333;
     }
-
     header {
       background: #0a3d62;
       color: white;
@@ -28,7 +25,6 @@
       z-index: 1000;
       transition: top 0.4s;
     }
-
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -37,7 +33,6 @@
       background: #3c6382;
       padding: 10px;
     }
-
     nav a {
       color: white;
       text-decoration: none;
@@ -46,28 +41,23 @@
       background: #0a3d62;
       font-size: 0.95rem;
     }
-
     nav a:hover,
     nav a.active {
       background: #1e6091;
     }
-
     main {
       max-width: 960px;
       margin: auto;
       padding: 16px;
       line-height: 1.7;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
-
+    ul {
+      padding-left: 20px;
+    }
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
-        align-items: center;
       }
-
       nav a {
         width: 90%;
         text-align: center;
@@ -76,7 +66,6 @@
   </style>
 </head>
 <body>
-
   <header id="topHeader">
     <h1>SMK Negeri 2 Lebong</h1>
     <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
@@ -96,9 +85,9 @@
 
   <main>
     <h2>Profil SMK Negeri 2 Lebong</h2>
-    <p><strong>SMK Negeri 2 Lebong</strong> adalah sekolah menengah kejuruan negeri yang berlokasi di Desa Tangua, Kecamatan Uram Jaya, Kabupaten Lebong, Provinsi Bengkulu.</p>
-    <p>Berdiri dengan semangat mencetak generasi unggul, SMK ini terus mengembangkan pendidikan vokasi yang berbasis dunia kerja dan kewirausahaan. Terakreditasi <strong>B</strong> dan memiliki NPSN <strong>10703078</strong>.</p>
-    <p>Saat ini, sekolah memiliki lima jurusan unggulan:</p>
+    <p><strong>SMK Negeri 2 Lebong</strong> adalah sekolah menengah kejuruan negeri yang berlokasi di Desa Tangua, Kecamatan Uram Jaya, Kabupaten Lebong, Provinsi Bengkulu. Sekolah ini memiliki komitmen kuat dalam mencetak lulusan yang berkompeten, berdaya saing tinggi, serta siap memasuki dunia kerja maupun melanjutkan pendidikan ke jenjang lebih tinggi.</p>
+
+    <p>Dengan NPSN 10703078 dan akreditasi <strong>B</strong>, SMK Negeri 2 Lebong membuka lima kompetensi keahlian unggulan, yaitu:</p>
     <ul>
       <li>Tata Busana</li>
       <li>Teknik Instalasi Tenaga Listrik</li>
@@ -106,22 +95,25 @@
       <li>Teknik Kendaraan Ringan Otomotif</li>
       <li>Desain Komunikasi Visual</li>
     </ul>
-    <p>Kami terus berinovasi dalam pembelajaran, membangun kerja sama dengan dunia industri, serta mengembangkan karakter siswa melalui kegiatan ekstrakurikuler dan budaya sekolah yang positif.</p>
-    <p>SMK Negeri 2 Lebong bukan hanya tempat belajar, tetapi tempat berkembang menjadi pribadi yang siap kerja, berjiwa wirausaha, dan berakhlak mulia.</p>
+
+    <p>Setiap jurusan didukung oleh fasilitas praktik modern dan pengajar profesional. Sekolah juga aktif dalam menjalin kemitraan dengan dunia usaha dan industri (DUDI), serta mengembangkan budaya sekolah positif untuk membentuk karakter peserta didik yang unggul dan berakhlak.</p>
+
+    <p>Dengan semangat kebersamaan dan inovasi, SMK Negeri 2 Lebong terus bertransformasi menjadi sekolah kejuruan yang adaptif dan relevan dengan kebutuhan zaman.</p>
   </main>
 
   <script>
-    let prevScrollpos = window.pageYOffset;
-    window.onscroll = function () {
-      const header = document.getElementById("topHeader");
-      let currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        header.style.top = "0";
-      } else {
+    const header = document.getElementById("topHeader");
+    let prevScroll = window.pageYOffset;
+    window.addEventListener("scroll", () => {
+      const currScroll = window.pageYOffset;
+      if (currScroll < 0) return;
+      if (currScroll > prevScroll) {
         header.style.top = "-100px";
+      } else {
+        header.style.top = "0";
       }
-      prevScrollpos = currentScrollPos;
-    };
+      prevScroll = currScroll;
+    });
   </script>
 </body>
 </html>
