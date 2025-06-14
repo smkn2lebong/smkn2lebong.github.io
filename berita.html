@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Berita | SMK Negeri 2 Lebong</title>
-  <meta name="description" content="Berita dan informasi terbaru seputar kegiatan SMK Negeri 2 Lebong." />
+  <title>Berita Terbaru | SMK Negeri 2 Lebong</title>
+  <meta name="description" content="Berita terkini dan update kegiatan terbaru di SMK Negeri 2 Lebong. Ikuti kabar terbaru dari sekolah kejuruan unggulan di Kabupaten Lebong." />
+  <meta name="keywords" content="Berita SMK Negeri 2 Lebong, Informasi Sekolah, Kegiatan SMK Lebong, SMKN 2 Lebong, Sekolah Kejuruan" />
+  <meta name="robots" content="index, follow">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
@@ -39,33 +41,30 @@
       background: #0a3d62;
       font-size: 0.95rem;
     }
-    nav a:hover,
-    nav a.active {
+    nav a:hover, nav a.active {
       background: #1e6091;
     }
     main {
       max-width: 960px;
       margin: auto;
-      padding: 16px;
-      line-height: 1.7;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      padding: 20px;
     }
     .post {
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #ccc;
+      background: #fff;
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+    .post img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
     .post h3 {
-      margin-bottom: 0.3rem;
-    }
-    .post a {
-      color: #0a3d62;
-      text-decoration: underline;
-    }
-    .post a:hover {
-      color: #1e6091;
+      margin-top: 0;
     }
     @media (max-width: 600px) {
       nav {
@@ -79,7 +78,6 @@
   </style>
 </head>
 <body>
-
   <header id="topHeader">
     <h1>SMK Negeri 2 Lebong</h1>
     <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
@@ -98,56 +96,59 @@
   </nav>
 
   <main>
-    <h2>Berita Terbaru</h2>
-    <div id="blog-posts">Memuat berita...</div>
+    <section class="berita">
+      <h2>Berita Terbaru</h2>
+      <div id="blog-posts">
+        Memuat berita...
+      </div>
+    </section>
   </main>
 
   <script>
-    const blogContainer = document.getElementById('blog-posts');
+    const header = document.getElementById("topHeader");
+    let prevScroll = window.pageYOffset;
+    window.addEventListener("scroll", () => {
+      const currScroll = window.pageYOffset;
+      if (currScroll < 0) return;
+      if (currScroll > prevScroll) {
+        header.style.top = "-100px";
+      } else {
+        header.style.top = "0";
+      }
+      prevScroll = currScroll;
+    });
+
     const proxy = "https://api.allorigins.win/get?url=";
     const blogURL = encodeURIComponent("https://smknegeri2lebong.blogspot.com/feeds/posts/default?alt=json");
-
     fetch(proxy + blogURL)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(result => {
         const data = JSON.parse(result.contents);
         const entries = data.feed.entry;
-        blogContainer.innerHTML = "";
+        const container = document.getElementById('blog-posts');
+        container.innerHTML = "";
 
         entries.forEach(entry => {
           const title = entry.title.$t;
           const link = entry.link.find(l => l.rel === 'alternate').href;
           const published = new Date(entry.published.$t).toLocaleDateString('id-ID');
+          const thumbnail = entry.media$thumbnail ? entry.media$thumbnail.url : 'assets/img/default.jpg';
 
-          const div = document.createElement('div');
-          div.className = "post";
-          div.innerHTML = `
+          const postDiv = document.createElement('div');
+          postDiv.className = 'post';
+          postDiv.innerHTML = `
+            <img src="${thumbnail}" alt="${title}">
             <h3>${title}</h3>
             <p><small>${published}</small></p>
-            <a href="${link}" target="_blank">Baca Selengkapnya</a>
+            <a href="${link}" target="_blank" rel="noopener">Baca Selengkapnya</a>
           `;
-          blogContainer.appendChild(div);
+          container.appendChild(postDiv);
         });
       })
-      .catch(error => {
-        blogContainer.innerHTML = "Gagal memuat berita.";
-        console.error("Error:", error);
+      .catch(err => {
+        console.error("Gagal memuat berita:", err);
+        document.getElementById('blog-posts').innerHTML = 'Gagal memuat berita.';
       });
   </script>
-
-  <script>
-    let prevScrollpos = window.pageYOffset;
-    window.onscroll = function () {
-      const header = document.getElementById("topHeader");
-      let currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        header.style.top = "0";
-      } else {
-        header.style.top = "-100px";
-      }
-      prevScrollpos = currentScrollPos;
-    };
-  </script>
-
 </body>
 </html>
