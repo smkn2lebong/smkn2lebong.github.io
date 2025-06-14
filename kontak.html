@@ -85,7 +85,6 @@
       background: #1e6091;
     }
 
-    /* Floating Chat Button */
     .floating-chat-btn {
       position: fixed;
       bottom: 20px;
@@ -168,7 +167,7 @@
       const pesan = document.getElementById("pesan").value.trim();
       const waLink = nomor.startsWith("0") ? "https://wa.me/62" + nomor.slice(1) : "https://wa.me/" + nomor;
       const teks = `📥 Pesan Baru dari Website:\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
-      await fetch(`https://api.telegram.org/bot7680568615:AAFcJmPcxX0SfkRv30SR7CVEZ4G-MJSA0Rk/sendMessage`, {
+      await fetch(`https://api.telegram.org/bot7680568615:AAHfC-y_pnJHuZf3Qvu6XShAOryBD_h3T2A/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: "1621437333", text: teks })
@@ -183,7 +182,7 @@
       const pesan = document.getElementById("popupPesan").value.trim();
       const waLink = nomor.startsWith("0") ? "https://wa.me/62" + nomor.slice(1) : "https://wa.me/" + nomor;
       const teks = `📥 Pesan Baru dari Website (Popup):\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
-      await fetch(`https://api.telegram.org/bot7680568615:AAFcJmPcxX0SfkRv30SR7CVEZ4G-MJSA0Rk/sendMessage`, {
+      await fetch(`https://api.telegram.org/bot7680568615:AAHfC-y_pnJHuZf3Qvu6XShAOryBD_h3T2A/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: "1621437333", text: teks })
