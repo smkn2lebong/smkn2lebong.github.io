@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Galeri Kegiatan | SMK Negeri 2 Lebong</title>
-  <meta name="description" content="Galeri kegiatan SMK Negeri 2 Lebong: dokumentasi foto dan video kegiatan belajar, lomba, kunjungan industri, dan lainnya." />
+  <meta name="description" content="Dokumentasi foto dan video kegiatan siswa SMK Negeri 2 Lebong. Saksikan momen-momen penting selama pembelajaran dan kegiatan sekolah." />
+  <meta name="keywords" content="Galeri SMKN 2 Lebong, Foto SMK Lebong, Video Sekolah, Dokumentasi Kegiatan SMK" />
+  <meta name="author" content="SMKN 2 Lebong" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
@@ -47,7 +49,6 @@
       max-width: 960px;
       margin: auto;
       padding: 16px;
-      line-height: 1.7;
     }
     .galeri-nav {
       text-align: center;
@@ -77,9 +78,6 @@
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    .video-list {
-      margin-top: 20px;
-    }
     .video-item {
       margin-bottom: 32px;
     }
@@ -90,18 +88,19 @@
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    .btn-3d, .btn-kembali {
+    .btn-3d,
+    .btn-kembali {
       display: inline-block;
       padding: 10px 16px;
-      background: #ffc107;
-      color: #102542;
+      margin-top: 12px;
       border-radius: 8px;
       font-weight: bold;
       text-decoration: none;
-      margin-top: 8px;
-      margin-right: 12px;
+    }
+    .btn-3d {
+      background: #ffc107;
+      color: #102542;
       box-shadow: 0 4px 0 #c69500;
-      transition: all 0.2s ease-in-out;
     }
     .btn-kembali {
       background: #3c6382;
@@ -120,12 +119,10 @@
   </style>
 </head>
 <body>
-
   <header id="topHeader">
     <h1>SMK Negeri 2 Lebong</h1>
     <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong | NPSN 10703078</p>
   </header>
-
   <nav>
     <a href="index.html">Beranda</a>
     <a href="profil.html">Profil</a>
@@ -139,21 +136,23 @@
   </nav>
 
   <main>
-    <h2>Galeri Kegiatan</h2>
-    <div class="galeri-nav">
-      <button onclick="showTab('foto')">Foto</button>
-      <button onclick="showTab('video')">Video</button>
-    </div>
+    <section class="galeri">
+      <h2>Galeri Kegiatan</h2>
+      <div class="galeri-nav">
+        <button onclick="showTab('foto')">Foto</button>
+        <button onclick="showTab('video')">Video</button>
+      </div>
 
-    <div id="foto" class="tab-content">
-      <h3>Dokumentasi Foto</h3>
-      <div class="foto-grid" id="foto-grid">Memuat foto...</div>
-    </div>
+      <div id="foto" class="tab-content">
+        <h3>Dokumentasi Foto</h3>
+        <div class="foto-grid" id="foto-grid">Memuat foto...</div>
+      </div>
 
-    <div id="video" class="tab-content" style="display: none;">
-      <h3>Dokumentasi Video</h3>
-      <div class="video-list" id="video-list">Memuat video...</div>
-    </div>
+      <div id="video" class="tab-content" style="display: none;">
+        <h3>Dokumentasi Video</h3>
+        <div class="video-list" id="video-list">Memuat video...</div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -162,15 +161,15 @@
       document.getElementById('video').style.display = tabName === 'video' ? 'block' : 'none';
     }
 
-    // Load Foto
+    // Foto
     fetch("assets/galeri_foto.txt")
       .then(res => res.text())
       .then(data => {
-        const lines = data.trim().split(/\r?\n/).filter(Boolean);
+        const lines = data.trim().split(/\r?\n/).filter(line => line);
         document.getElementById("foto-grid").innerHTML = lines.map(url => `<img src="${url}" alt="Foto Kegiatan">`).join('');
       });
 
-    // Load Video
+    // Video
     fetch("assets/galeri_video.txt")
       .then(res => res.text())
       .then(data => {
@@ -181,39 +180,33 @@
           const title = blocks[i].trim();
           const url = blocks[i+1].trim();
           let html = "";
-
           if (url.includes("youtube.com") || url.includes("youtu.be")) {
             const id = url.includes("embed") ? url.split("/").pop() : new URL(url).searchParams.get("v") || url.split("/").pop();
-            html = `
-              <div class="video-item">
-                <h3>${title}</h3>
-                <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
-              </div>`;
+            html = `<div class="video-item"><h3>${title}</h3><iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe></div>`;
           } else if (url.includes("facebook.com")) {
             html = `
               <div class="video-item">
                 <h3>${title}</h3>
-                <p>Video hanya dapat ditonton melalui Facebook. Klik tombol berikut:</p>
+                <p>Video hanya dapat ditonton melalui Facebook.</p>
                 <a href="${url}" class="btn-3d" target="_blank">Tonton di Facebook</a>
+                <a href="galeri.html" class="btn-kembali">Kembali ke Galeri</a>
               </div>`;
           } else {
-            html = `<div class="video-item"><p>Link tidak dikenali: ${url}</p></div>`;
+            html = `<p>Link tidak dikenali: ${url}</p>`;
           }
-
           container.innerHTML += html;
         }
       });
 
-    // Sticky header logic
+    // Scroll: header auto-hide
+    const header = document.getElementById("topHeader");
     let prevScroll = window.pageYOffset;
     window.addEventListener("scroll", () => {
-      const header = document.getElementById("topHeader");
       const currScroll = window.pageYOffset;
-      if (!header) return;
+      if (currScroll < 0) return;
       header.style.top = (currScroll > prevScroll) ? "-100px" : "0";
       prevScroll = currScroll;
     });
   </script>
-
 </body>
 </html>
