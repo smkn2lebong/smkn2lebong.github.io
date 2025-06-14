@@ -20,7 +20,7 @@
       background: #0a3d62;
       color: white;
       text-align: center;
-      padding: 1rem;
+      padding: 1rem 10px;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -47,9 +47,10 @@
       background: #1e6091;
     }
     main {
-      max-width: 800px;
+      max-width: 960px;
       margin: auto;
-      padding: 20px;
+      padding: 16px;
+      line-height: 1.7;
     }
     form {
       background: #fff;
@@ -84,41 +85,14 @@
     button:hover {
       background: #1e6091;
     }
-
-    .floating-chat-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #0a3d62;
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 999;
-    }
-    .chat-popup {
-      display: none;
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 300px;
-      background-color: #fff;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      border-radius: 12px;
-      overflow: hidden;
-      z-index: 999;
-    }
-    .chat-popup-header {
-      background: #0a3d62;
-      color: white;
-      padding: 10px;
-      font-weight: bold;
-    }
-    .chat-popup form {
-      padding: 10px;
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        width: 90%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -148,18 +122,6 @@
     </form>
   </main>
 
-  <button class="floating-chat-btn" onclick="toggleChatPopup()">💬</button>
-
-  <div class="chat-popup" id="popupChat">
-    <div class="chat-popup-header">Kirim Pesan ke Admin</div>
-    <form onsubmit="kirimPesanTelegramPopup(); return false;">
-      <input type="text" id="popupNama" placeholder="Nama Anda" required />
-      <input type="tel" id="popupNomor" placeholder="Nomor WA Anda (08xxxx)" required />
-      <textarea id="popupPesan" placeholder="Pesan Anda" required></textarea>
-      <button type="submit">Kirim</button>
-    </form>
-  </div>
-
   <script>
     async function kirimPesanTelegram() {
       const nama = document.getElementById("nama").value.trim();
@@ -174,29 +136,6 @@
       });
       alert("Pesan berhasil dikirim! Admin akan segera membalas.");
       document.getElementById("formTelegram").reset();
-    }
-
-    async function kirimPesanTelegramPopup() {
-      const nama = document.getElementById("popupNama").value.trim();
-      const nomor = document.getElementById("popupNomor").value.trim();
-      const pesan = document.getElementById("popupPesan").value.trim();
-      const waLink = nomor.startsWith("0") ? "https://wa.me/62" + nomor.slice(1) : "https://wa.me/" + nomor;
-      const teks = `📥 Pesan Baru dari Website (Popup):\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
-      await fetch(`https://api.telegram.org/bot7680568615:AAHfC-y_pnJHuZf3Qvu6XShAOryBD_h3T2A/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: "1621437333", text: teks })
-      });
-      alert("Pesan berhasil dikirim melalui popup!");
-      document.getElementById("popupNama").value = "";
-      document.getElementById("popupNomor").value = "";
-      document.getElementById("popupPesan").value = "";
-      document.getElementById("popupChat").style.display = "none";
-    }
-
-    function toggleChatPopup() {
-      const popup = document.getElementById("popupChat");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
     }
 
     const header = document.getElementById("topHeader");
