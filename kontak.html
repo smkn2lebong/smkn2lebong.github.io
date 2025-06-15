@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kontak | SMK Negeri 2 Lebong</title>
   <meta name="description" content="Kontak resmi SMK Negeri 2 Lebong. Hubungi kami untuk informasi pendaftaran, jurusan, dan kegiatan sekolah." />
-  <meta name="keywords" content="Kontak SMKN 2 Lebong, Hubungi SMK Negeri 2 Lebong, WA SMK 2 Lebong" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph Meta -->
   <meta property="og:title" content="Kontak SMKN 2 Lebong" />
   <meta property="og:description" content="Hubungi admin SMKN 2 Lebong langsung melalui WhatsApp atau kirim pesan lewat form website." />
   <meta property="og:image" content="https://smkn2lebong.github.io/assets/images/promo.jpg" />
   <meta property="og:url" content="https://smkn2lebong.github.io/kontak.html" />
   <meta property="og:type" content="website" />
-
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
   <style>
@@ -22,7 +17,6 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #f4f6f9;
       margin: 0;
-      padding: 0;
       color: #333;
     }
     header {
@@ -33,7 +27,6 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      transition: top 0.4s;
     }
     nav {
       display: flex;
@@ -56,28 +49,32 @@
       background: #1e6091;
     }
     main {
-      max-width: 960px;
+      max-width: 700px;
       margin: auto;
-      padding: 16px;
-      line-height: 1.7;
+      padding: 20px;
     }
     form {
       background: #fff;
-      padding: 20px;
-      border-radius: 12px;
+      padding: 24px;
+      border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     h2 {
       color: #0a3d62;
       text-align: center;
+      margin-bottom: 24px;
     }
     input, textarea {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 1rem;
+      resize: vertical;
+    }
+    textarea {
+      min-height: 120px;
     }
     button {
       display: block;
@@ -85,11 +82,12 @@
       background: #0a3d62;
       color: white;
       border: none;
-      padding: 12px;
+      padding: 14px;
       font-size: 1rem;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
       margin-top: 10px;
+      transition: background 0.2s;
     }
     button:hover {
       background: #1e6091;
@@ -106,7 +104,10 @@
   </style>
 </head>
 <body>
-  <header id="topHeader"></header>
+  <header>
+    <h1>SMK Negeri 2 Lebong</h1>
+    <p>Sekolah Kejuruan Negeri Terbaik di Kabupaten Lebong</p>
+  </header>
   <nav>
     <a href="index.html">Beranda</a>
     <a href="profil.html">Profil</a>
@@ -118,12 +119,13 @@
     <a href="ppdb.html">PPDB</a>
     <a href="kontak.html" class="active">Kontak</a>
   </nav>
+
   <main>
-    <h2>📞 Kirim Pesan ke Admin</h2>
+    <h2>📨 Kirim Pesan ke Admin</h2>
     <form id="formTelegram" onsubmit="kirimPesanTelegram(); return false;">
       <input type="text" id="nama" placeholder="Nama Anda" required />
-      <input type="tel" id="nomor" placeholder="Nomor WA Anda (08xxxxxxxxxx)" required />
-      <textarea id="pesan" placeholder="Tulis pesan Anda di sini..." required></textarea>
+      <input type="tel" id="nomor" placeholder="Nomor WhatsApp (08xxxx)" required />
+      <textarea id="pesan" placeholder="Tulis pesan atau pertanyaan Anda di sini..." required></textarea>
       <button type="submit">Kirim ke Admin</button>
     </form>
   </main>
@@ -134,23 +136,25 @@
       const nomor = document.getElementById("nomor").value.trim();
       const pesan = document.getElementById("pesan").value.trim();
       const waLink = nomor.startsWith("0") ? "https://wa.me/62" + nomor.slice(1) : "https://wa.me/" + nomor;
-      const teks = `📥 Pesan Baru dari Website:\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
-      await fetch(`https://api.telegram.org/bot7680568615:AAHfC-y_pnJHuZf3Qvu6XShAOryBD_h3T2A/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: "-4653714507", text: teks })
-      });
-      alert("Pesan berhasil dikirim! Admin akan segera membalas.");
-      document.getElementById("formTelegram").reset();
-    }
 
-    const header = document.getElementById("topHeader");
-    let prevScroll = window.pageYOffset;
-    window.addEventListener("scroll", () => {
-      const currScroll = window.pageYOffset;
-      header.style.top = (currScroll > prevScroll) ? "-100px" : "0";
-      prevScroll = currScroll;
-    });
+      const teks = `📥 Pesan Baru dari Website:\n\n👤 Nama: ${nama}\n📱 Nomor WA: ${waLink}\n💬 Pesan:\n${pesan}`;
+
+      try {
+        await fetch("https://api.telegram.org/bot7680568615:AAHfC-y_pnJHuZf3Qvu6XShAOryBD_h3T2A/sendMessage", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: "-4653714507",
+            text: teks
+          })
+        });
+        alert("Pesan berhasil dikirim! Admin akan segera membalas.");
+        document.getElementById("formTelegram").reset();
+      } catch (error) {
+        alert("Gagal mengirim pesan. Coba lagi nanti.");
+        console.error(error);
+      }
+    }
   </script>
 </body>
 </html>
