@@ -4,10 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Berita Terbaru | SMK Negeri 2 Lebong</title>
-  <meta name="description" content="Kumpulan berita terbaru dan informasi kegiatan SMK Negeri 2 Lebong. Update setiap saat dari berbagai aktivitas sekolah.">
-  <meta name="keywords" content="Berita SMKN 2 Lebong, Informasi Sekolah, Kegiatan Siswa, SMK Lebong">
-  <meta name="robots" content="index, follow">
+
+  <!-- SEO -->
+  <meta name="description" content="Kumpulan berita terbaru dan informasi kegiatan SMK Negeri 2 Lebong. Update setiap saat dari berbagai aktivitas sekolah." />
+  <meta name="keywords" content="Berita SMKN 2 Lebong, Informasi Sekolah, Kegiatan Siswa, SMK Lebong" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="SMKN 2 Lebong" />
+
+  <!-- Open Graph (OG) Tags -->
+  <meta property="og:title" content="Berita SMKN 2 Lebong - Terbaru dan Aktual" />
+  <meta property="og:description" content="Kumpulan berita dan informasi terbaru dari SMK Negeri 2 Lebong. Tetap terhubung dengan kegiatan sekolah." />
+  <meta property="og:image" content="https://smkn2lebong.sch.id/assets/img/berita-og.jpg" />
+  <meta property="og:url" content="https://smkn2lebong.sch.id/berita.html" />
+  <meta property="og:type" content="website" />
+
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
   <style>
     body {
       margin: 0;
@@ -109,7 +121,6 @@
 
   <script>
     const container = document.getElementById('blog-posts');
-
     const proxy = "https://api.allorigins.win/get?url=";
     const feedURL = encodeURIComponent("https://smknegeri2lebong.blogspot.com/feeds/posts/default?alt=json");
 
@@ -145,7 +156,7 @@
         container.innerHTML = "Tidak dapat memuat berita saat ini.";
       });
 
-    // Scroll nav hide/show
+    // Scroll hide/show header
     const header = document.getElementById("topHeader");
     let prevScroll = window.pageYOffset;
     window.addEventListener("scroll", () => {
